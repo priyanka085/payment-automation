@@ -1,4 +1,7 @@
-pytest
+pytest~=9.0.2
 requests
-responses
-jsonschema
+responses~=0.25.8
+jsonschema~=4.26.0
+
+utils~=1.0.2
+django-request~=1.7.1
