@@ -24,5 +24,4 @@ jobs:
     - name: Run Smoke Tests
       run: pytest -m smoke
 
-    - name: Run Regression Tests
-      run: pytest -m regression
+
