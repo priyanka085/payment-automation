@@ -28,20 +28,39 @@ def test_payment_authorization_success(payment_client):
 
 @responses.activate
 @pytest.mark.smoke
-def test_payment_authorization_declined(payment_client):
+def test_payment_authorization_expired_card(payment_client):
     responses.add(
         responses.POST,
         "https://mock-gateway/authorize",
         json={
             "status": "DECLINED",
-            "reason": "Expired card"
+            "reason": "EXPIRED_CARD"
+        },
+        status=402
+    )
+    response = payment_client.authorize_payment(
+        payload=EXPIRED_CARD,
+        headers={"Content-Type": "application/json"}
+    )
+    assert response.status_code == 402
+    assert response.json()["reason"] == "EXPIRED_CARD"
+
+@responses.activate
+@pytest.mark.smoke
+def test_payment_authorization_invalid_card(payment_client):
+    responses.add(
+        responses.POST,
+        "https://mock-gateway/authorize",
+        json={
+            "status": "DECLINED",
+            "reason": "INVALID_CARD_NUMBER"
         },
         status=422
     )
     response = payment_client.authorize_payment(
-        payload=INVALID_PAYMENT,
+        payload=INVALID_CARD,
         headers={"Content-Type": "application/json"}
     )
     assert response.status_code == 422
-    assert response.json()["status"] == "DECLINED"
+    assert response.json()["reason"] == "INVALID_CARD_NUMBER"
 
