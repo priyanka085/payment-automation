@@ -6,6 +6,21 @@ VALID_PAYMENT = {
     "currency": "USD"
 }
 
+VALID_REFUND = {
+    "cardNumber": "4111111111111111",
+    "expiry": "12/26",
+    "cvv": "123",
+    "amount": 100,
+    "currency": "USD"
+}
+REFUND_EXCEEDS_AMOUNT = {
+    "cardNumber": "4111111111111111",
+    "expiry": "12/26",
+    "cvv": "123",
+    "amount": 200,
+    "currency": "USD"
+}
+
 INVALID_CARD = {
     "cardNumber": "4000000000000002",
     "expiry": "12/20",

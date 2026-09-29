@@ -10,3 +10,9 @@ class PaymentClient:
             json=payload,
             headers=headers
         )
+    def refund_payment(self, payload, headers):
+        return requests.post(
+            f"{self.base_url}/refund",
+            json=payload,
+            headers=headers
+        )
